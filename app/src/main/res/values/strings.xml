@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">AndroidAccelerator2022</string>
+    <string name="second_activity_button">Next</string>
+    <string name="second_text">More text!!!</string>
+    <string name="sample_text">Sample Text</string>
+    <string name="num_of_moons_text">Moons: %d</string>
+    <string name="ring_type_text">Ring type: %s</string>
+    <string name="todo">TODO</string>
+    <string name="delete_planet_icon">Delete Planet</string>
+
+    <!-- Ring types -->
+    <string name="ring_type_none">No rings</string>
+    <string name="ring_type_faint">Barely visible</string>
+    <string name="ring_type_strong">Visible</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

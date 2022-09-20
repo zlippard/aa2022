@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/planetListFragment">
+    <fragment
+        android:id="@+id/planetListFragment"
+        android:name="com.zaclippard.androidaccelerator2022.singleactivity.PlanetListFragment"
+        android:label="PlanetListFragment" >
+        <action
+            android:id="@+id/action_planetListFragment_to_planetDetailsFragment"
+            app:destination="@id/planetDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/planetDetailsFragment"
+        android:name="com.zaclippard.androidaccelerator2022.singleactivity.PlanetDetailsFragment"
+        android:label="fragment_planet_details"
+        tools:layout="@layout/fragment_planet_details" >
+        <argument
+            android:name="planet"
+            app:argType="com.zaclippard.androidaccelerator2022.models.Planet" />
+    </fragment>
+</navigation>
