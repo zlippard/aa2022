@@ -1,9 +1,7 @@
 package com.zaclippard.androidaccelerator2022.viewmodels
 
-import android.media.Image
 import android.util.Log
 import androidx.lifecycle.*
-import com.zaclippard.androidaccelerator2022.PlanetStore
 import com.zaclippard.androidaccelerator2022.models.Planet
 import com.zaclippard.androidaccelerator2022.networking.StarWarsApiService
 import com.zaclippard.androidaccelerator2022.utils.CustomResult

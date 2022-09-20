@@ -19,6 +19,9 @@ import com.zaclippard.androidaccelerator2022.viewmodels.PlanetListViewModel
 class PlanetListFragment : Fragment() {
 
     private lateinit var binding: FragmentPlanetListBinding
+
+    // Using the lazy viewModels method is a light wrapper
+    // around fetching the viewmodel from ViewModelProviders
     private val viewModel: PlanetListViewModel by viewModels {
         PlanetListViewModel.Factory(starWarsApiService = buildStarWarsApiService())
     }

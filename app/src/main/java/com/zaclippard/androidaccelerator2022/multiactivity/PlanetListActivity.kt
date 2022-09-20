@@ -22,11 +22,12 @@ import com.zaclippard.androidaccelerator2022.viewmodels.PlanetListViewModel
 class PlanetListActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySecondBinding
+
+    // Using the lazy viewModels method is a light wrapper
+    // around fetching the viewmodel from ViewModelProviders
     private val viewModel by viewModels<PlanetListViewModel> {
         PlanetListViewModel.Factory(starWarsApiService = buildStarWarsApiService())
     }
-
-//    private val planetStore = PlanetStore(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
