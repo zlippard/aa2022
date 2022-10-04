@@ -6,14 +6,10 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast.LENGTH_LONG
 import androidx.activity.viewModels
-import androidx.lifecycle.Observer
 import com.google.android.material.snackbar.Snackbar
 import com.zaclippard.androidaccelerator2022.PlanetRecyclerAdapter
-import com.zaclippard.androidaccelerator2022.PlanetStore
 import com.zaclippard.androidaccelerator2022.databinding.ActivitySecondBinding
-import com.zaclippard.androidaccelerator2022.models.Moon
 import com.zaclippard.androidaccelerator2022.models.Planet
-import com.zaclippard.androidaccelerator2022.models.RingType
 import com.zaclippard.androidaccelerator2022.multiactivity.PlanetDetailsActivity.Companion.INTENT_EXTRA_PLANET
 import com.zaclippard.androidaccelerator2022.networking.buildStarWarsApiService
 import com.zaclippard.androidaccelerator2022.utils.CustomResult
@@ -41,6 +37,20 @@ class PlanetListActivity : AppCompatActivity() {
 //            TAG,
 //            "onCreate() called. savedInstanceState[$KEY_TEST] = ${savedInstanceState?.getString(KEY_TEST)}",
 //        )
+
+        // Example utilizing coroutine and
+        // suspend function for fetching articles
+        // from API.
+//        lifecycleScope.launch(IO) {
+//            val response = buildStarWarsApiService()
+//                .getPlanetsViaSuspend()
+//
+//            if (response.isSuccessful) {
+//                showPlanetList(response.body()!!.results)
+//            } else {
+//                showError()
+//            }
+//        }
 
         viewModel.planets.observe(this) { planetsResult ->
             when (planetsResult) {

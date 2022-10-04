@@ -48,6 +48,11 @@ class PlanetListFragment : Fragment() {
                 }
             }
         }
+
+        binding.flowButton.setOnClickListener {
+            val action = PlanetListFragmentDirections.actionPlanetListFragmentToFlowExampleFragment()
+            findNavController().navigate(action)
+        }
     }
 
     private fun showPlanetList(planets: List<Planet>) {

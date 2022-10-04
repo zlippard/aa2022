@@ -11,6 +11,9 @@
         <action
             android:id="@+id/action_planetListFragment_to_planetDetailsFragment"
             app:destination="@id/planetDetailsFragment" />
+        <action
+            android:id="@+id/action_planetListFragment_to_flowExampleFragment"
+            app:destination="@id/flowExampleFragment" />
     </fragment>
     <fragment
         android:id="@+id/planetDetailsFragment"
@@ -21,4 +24,8 @@
             android:name="planet"
             app:argType="com.zaclippard.androidaccelerator2022.models.Planet" />
     </fragment>
+    <fragment
+        android:id="@+id/flowExampleFragment"
+        android:name="com.zaclippard.androidaccelerator2022.singleactivity.FlowExampleFragment"
+        android:label="FlowExampleFragment" />
 </navigation>
