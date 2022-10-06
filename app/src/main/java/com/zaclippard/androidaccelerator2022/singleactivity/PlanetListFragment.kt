@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
+import com.zaclippard.androidaccelerator2022.App
 import com.zaclippard.androidaccelerator2022.PlanetRecyclerAdapter
 import com.zaclippard.androidaccelerator2022.databinding.FragmentPlanetListBinding
 import com.zaclippard.androidaccelerator2022.models.Planet
@@ -23,7 +24,7 @@ class PlanetListFragment : Fragment() {
     // Using the lazy viewModels method is a light wrapper
     // around fetching the viewmodel from ViewModelProviders
     private val viewModel: PlanetListViewModel by viewModels {
-        PlanetListViewModel.Factory(starWarsApiService = buildStarWarsApiService())
+        PlanetListViewModel.Factory(planetRepo = App.planetRepo)
     }
 
     override fun onCreateView(

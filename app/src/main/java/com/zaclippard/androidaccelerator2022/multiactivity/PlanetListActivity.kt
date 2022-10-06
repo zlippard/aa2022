@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.Toast.LENGTH_LONG
 import androidx.activity.viewModels
 import com.google.android.material.snackbar.Snackbar
+import com.zaclippard.androidaccelerator2022.App
 import com.zaclippard.androidaccelerator2022.PlanetRecyclerAdapter
 import com.zaclippard.androidaccelerator2022.databinding.ActivitySecondBinding
 import com.zaclippard.androidaccelerator2022.models.Planet
@@ -22,7 +23,7 @@ class PlanetListActivity : AppCompatActivity() {
     // Using the lazy viewModels method is a light wrapper
     // around fetching the viewmodel from ViewModelProviders
     private val viewModel by viewModels<PlanetListViewModel> {
-        PlanetListViewModel.Factory(starWarsApiService = buildStarWarsApiService())
+        PlanetListViewModel.Factory(planetRepo = App.planetRepo)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

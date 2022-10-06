@@ -11,7 +11,7 @@ interface StarWarsApiService {
 
 
     @GET("/api/planets")
-    suspend fun getPlanetsViaSuspend(): Response<GetPlanetsResponse>
+    suspend fun getPlanetsViaSuspend(): GetPlanetsResponse
 }
 
 
