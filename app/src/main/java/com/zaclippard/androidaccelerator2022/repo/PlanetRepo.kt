@@ -6,4 +6,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface PlanetRepo {
     fun getPlanets(): Flow<CustomResult<List<Planet>>>
+
+    suspend fun searchPlanets(search: String): List<Planet>
 }

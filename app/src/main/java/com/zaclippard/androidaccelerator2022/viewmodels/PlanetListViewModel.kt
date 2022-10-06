@@ -1,12 +1,12 @@
 package com.zaclippard.androidaccelerator2022.viewmodels
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.zaclippard.androidaccelerator2022.models.Planet
-import com.zaclippard.androidaccelerator2022.networking.StarWarsApiService
 import com.zaclippard.androidaccelerator2022.repo.PlanetRepo
 import com.zaclippard.androidaccelerator2022.utils.CustomResult
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 class PlanetListViewModel(
@@ -21,7 +21,25 @@ class PlanetListViewModel(
         }
     }
 
-    val planets: LiveData<CustomResult<List<Planet>>> =
-        planetRepo.getPlanets().asLiveData()
+    init {
+        viewModelScope.launch(IO) {
+            planetRepo
+                .getPlanets()
+                .onEach { newPlanets ->
+                    _planets.postValue(newPlanets)
+                }
+                .collect()
+        }
+    }
+
+    fun searchPlanets(search: String) {
+        viewModelScope.launch(IO) {
+            val filteredPlanets = planetRepo.searchPlanets("%$search%")
+            _planets.postValue(CustomResult.Success(filteredPlanets))
+        }
+    }
+
+    private val _planets = MutableLiveData<CustomResult<List<Planet>>>()
+    val planets: LiveData<CustomResult<List<Planet>>> = _planets
 
 }

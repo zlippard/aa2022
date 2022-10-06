@@ -13,4 +13,7 @@ interface PlanetDao {
 
     @Insert(onConflict = REPLACE)
     suspend fun addPlanets(planets: List<Planet>)
+
+    @Query("SELECT * FROM planets WHERE name LIKE :search")
+    suspend fun searchPlanets(search: String): List<Planet>
 }

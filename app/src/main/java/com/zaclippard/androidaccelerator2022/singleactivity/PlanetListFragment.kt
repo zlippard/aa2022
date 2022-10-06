@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -13,7 +14,6 @@ import com.zaclippard.androidaccelerator2022.App
 import com.zaclippard.androidaccelerator2022.PlanetRecyclerAdapter
 import com.zaclippard.androidaccelerator2022.databinding.FragmentPlanetListBinding
 import com.zaclippard.androidaccelerator2022.models.Planet
-import com.zaclippard.androidaccelerator2022.networking.buildStarWarsApiService
 import com.zaclippard.androidaccelerator2022.utils.CustomResult
 import com.zaclippard.androidaccelerator2022.viewmodels.PlanetListViewModel
 
@@ -38,6 +38,22 @@ class PlanetListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val queryTextListener = object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                // do nothing, search is done on text changes
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText?.let { searchQuery ->
+                    viewModel.searchPlanets(searchQuery)
+                }
+                return true
+            }
+        }
+
+        binding.searchView.setOnQueryTextListener(queryTextListener)
 
         viewModel.planets.observe(viewLifecycleOwner) { planetsResult ->
             when (planetsResult) {
