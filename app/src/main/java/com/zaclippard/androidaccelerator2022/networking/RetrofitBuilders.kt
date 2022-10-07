@@ -9,6 +9,7 @@ private fun buildStarWarsRetrofit() =
         .addConverterFactory(MoshiConverterFactory.create())
         .build()
 
-fun buildStarWarsApiService() = buildStarWarsRetrofit().create(StarWarsApiService::class.java)
+fun buildStarWarsApiService() = buildStarWarsRetrofit()
+    .create(StarWarsApiService::class.java)
 
 
