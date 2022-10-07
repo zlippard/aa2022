@@ -37,6 +37,10 @@ class PlanetRepoImpl(
         }
     }
 
+    override suspend fun searchPlanets(search: String): List<Planet> {
+        return planetDao.searchPlanets(search)
+    }
+
     companion object {
         private const val TAG = "PlanetRepoImpl"
     }
