@@ -11,4 +11,11 @@ data class Source(
     @PrimaryKey
     val name: String,
     val id: String?,
+    val category: Category? = Category.ONE,
 ) : Parcelable
+
+enum class Category {
+    ONE,
+    TWO,
+    THREE,
+}

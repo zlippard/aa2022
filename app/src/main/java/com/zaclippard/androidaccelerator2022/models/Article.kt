@@ -16,6 +16,6 @@ data class Article(
     val author: String?,
     val description: String?,
     val url: String?,
-//    val source: Source,
-    @ColumnInfo(name = "source_name") val sourceName: String,
+    val source: Source,
+//    @ColumnInfo(name = "source_name") val sourceName: String,
 ) : Parcelable

@@ -15,8 +15,9 @@ class ArticleRepoImpl(
     private val sourceDao: SourceDao,
     private val newsApiService: NewsApiService,
 ) : ArticleRepo {
-    override fun getArticles(): Flow<CustomResult<List<ArticleAndSource>>> {
-        return flow {
+    override fun getArticles(): Flow<CustomResult<List<Article>>> {
+//    override fun getArticles(): Flow<CustomResult<List<Article>>> {
+            return flow {
             val articlesFromLocalDb = articleDao.getArticles()
 
             emit(CustomResult.Success(articlesFromLocalDb))
@@ -28,25 +29,25 @@ class ArticleRepoImpl(
                     .getArticles()
                     .articles
 
-                val articleAndSourceList = articlesFromNetwork
-                    .map { articleDto ->
-                        val article = Article(
-                            articleDto.title,
-                            articleDto.author,
-                            articleDto.description,
-                            articleDto.url,
-                            articleDto.source.name,
-                        )
-                        ArticleAndSource(article, articleDto.source)
-                    }
-                emit(CustomResult.Success(articleAndSourceList))
+//                val articleAndSourceList = articlesFromNetwork
+//                    .map { articleDto ->
+//                        val article = Article(
+//                            articleDto.title,
+//                            articleDto.author,
+//                            articleDto.description,
+//                            articleDto.url,
+//                            articleDto.source.name,
+//                        )
+//                        ArticleAndSource(article, articleDto.source)
+//                    }
+                emit(CustomResult.Success(articlesFromNetwork))
                 if (articlesFromNetwork.isNotEmpty()) {
                     articleDao.deleteArticles()
                     sourceDao.deleteSources()
                     articlesFromNetwork.forEach { article ->
                         sourceDao.addSource(article.source)
                     }
-                    articleDao.addArticles(articleAndSourceList.map { it.article })
+                    articleDao.addArticles(articlesFromNetwork)
                 }
             } catch (e: Exception) {
                 //emit(CustomResult.Failure(e.message ?: "Unknown Failure"))

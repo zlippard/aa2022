@@ -10,7 +10,8 @@ import com.zaclippard.androidaccelerator2022.models.ArticleAndSource
 @Dao
 interface ArticleDao {
     @Query("SELECT * FROM articles")
-    suspend fun getArticles(): List<ArticleAndSource>
+    suspend fun getArticles(): List<Article>
+//    suspend fun getArticles(): List<ArticleAndSource>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addArticles(articles: List<Article>)
