@@ -23,7 +23,10 @@ class PlanetListActivity : AppCompatActivity() {
     // Using the lazy viewModels method is a light wrapper
     // around fetching the viewmodel from ViewModelProviders
     private val viewModel by viewModels<PlanetListViewModel> {
-        PlanetListViewModel.Factory(planetRepo = App.planetRepo)
+        PlanetListViewModel.Factory(
+            planetRepo = App.planetRepo,
+            articleRepo = App.articleRepo,
+        )
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -24,7 +24,10 @@ class PlanetListFragment : Fragment() {
     // Using the lazy viewModels method is a light wrapper
     // around fetching the viewmodel from ViewModelProviders
     private val viewModel: PlanetListViewModel by viewModels {
-        PlanetListViewModel.Factory(planetRepo = App.planetRepo)
+        PlanetListViewModel.Factory(
+            planetRepo = App.planetRepo,
+            articleRepo = App.articleRepo,
+        )
     }
 
     override fun onCreateView(
