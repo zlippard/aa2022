@@ -28,7 +28,7 @@ class App : Application() {
             PlanetRepoImpl(starWarsDatabase.planetDao(), starWarsApiService)
         }
         val articleRepo: ArticleRepo by lazy {
-            ArticleRepoImpl(newsDatabase.articleDao(), newsApiService)
+            ArticleRepoImpl(newsDatabase.articleDao(), newsDatabase.sourceDao(), newsApiService)
         }
     }
 

@@ -2,7 +2,9 @@ package com.zaclippard.androidaccelerator2022.repo
 
 import android.util.Log
 import com.zaclippard.androidaccelerator2022.dao.ArticleDao
+import com.zaclippard.androidaccelerator2022.dao.SourceDao
 import com.zaclippard.androidaccelerator2022.models.Article
+import com.zaclippard.androidaccelerator2022.models.ArticleAndSource
 import com.zaclippard.androidaccelerator2022.networking.NewsApiService
 import com.zaclippard.androidaccelerator2022.utils.CustomResult
 import kotlinx.coroutines.flow.Flow
@@ -10,9 +12,10 @@ import kotlinx.coroutines.flow.flow
 
 class ArticleRepoImpl(
     private val articleDao: ArticleDao,
+    private val sourceDao: SourceDao,
     private val newsApiService: NewsApiService,
 ) : ArticleRepo {
-    override fun getArticles(): Flow<CustomResult<List<Article>>> {
+    override fun getArticles(): Flow<CustomResult<List<ArticleAndSource>>> {
         return flow {
             val articlesFromLocalDb = articleDao.getArticles()
 
@@ -23,12 +26,27 @@ class ArticleRepoImpl(
             try {
                 val articlesFromNetwork = newsApiService
                     .getArticles()
-                    .results
+                    .articles
 
-                emit(CustomResult.Success(articlesFromNetwork))
+                val articleAndSourceList = articlesFromNetwork
+                    .map { articleDto ->
+                        val article = Article(
+                            articleDto.title,
+                            articleDto.author,
+                            articleDto.description,
+                            articleDto.url,
+                            articleDto.source.name,
+                        )
+                        ArticleAndSource(article, articleDto.source)
+                    }
+                emit(CustomResult.Success(articleAndSourceList))
                 if (articlesFromNetwork.isNotEmpty()) {
                     articleDao.deleteArticles()
-                    articleDao.addArticles(articlesFromNetwork)
+                    sourceDao.deleteSources()
+                    articlesFromNetwork.forEach { article ->
+                        sourceDao.addSource(article.source)
+                    }
+                    articleDao.addArticles(articleAndSourceList.map { it.article })
                 }
             } catch (e: Exception) {
                 //emit(CustomResult.Failure(e.message ?: "Unknown Failure"))

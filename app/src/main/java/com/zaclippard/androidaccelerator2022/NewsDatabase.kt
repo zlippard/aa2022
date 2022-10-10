@@ -7,6 +7,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.zaclippard.androidaccelerator2022.converters.SourceConverter
 import com.zaclippard.androidaccelerator2022.dao.ArticleDao
+import com.zaclippard.androidaccelerator2022.dao.SourceDao
 import com.zaclippard.androidaccelerator2022.models.Article
 import com.zaclippard.androidaccelerator2022.models.Source
 
@@ -31,5 +32,7 @@ abstract class NewsDatabase : RoomDatabase() {
     }
 
     abstract fun articleDao(): ArticleDao
+
+    abstract fun sourceDao(): SourceDao
 }
 
