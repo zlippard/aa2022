@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.compose.material3.MaterialTheme
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
@@ -14,6 +15,7 @@ import com.zaclippard.androidaccelerator2022.App
 import com.zaclippard.androidaccelerator2022.PlanetRecyclerAdapter
 import com.zaclippard.androidaccelerator2022.databinding.FragmentPlanetListBinding
 import com.zaclippard.androidaccelerator2022.models.Planet
+import com.zaclippard.androidaccelerator2022.ui.compose.PlanetListComposable
 import com.zaclippard.androidaccelerator2022.utils.CustomResult
 import com.zaclippard.androidaccelerator2022.viewmodels.PlanetListViewModel
 
@@ -97,6 +99,13 @@ class PlanetListFragment : Fragment() {
                 )
             )
             binding.planetRecyclerView.scrollToPosition(1)
+        }
+
+        // Compose Approach!
+        binding.composeView.setContent {
+            MaterialTheme {
+                PlanetListComposable(planets)
+            }
         }
     }
 
